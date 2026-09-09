@@ -3,28 +3,112 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wanderlust Travel</title>
+  <title>TerraNova | Smart Travel Explorer</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-  <header>
-    <h2>Wanderlust</h2>
-    <nav>
-      <a href="#destinations">Destinations</a>
-      <a href="#about">About</a>
-    </nav>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">Terra<span>Nova</span></div>
+    <div class="nav-links">
+      <a href="#explore">Explore</a>
+      <a href="#planner">Budget Planner</a>
+      <a href="#checklist">Packing List</a>
+    </div>
+    <div class="nav-actions">
+      <span class="badge" id="saved-count">0 Saved</span>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="tag">AI-Inspired Discovery</div>
+      <h1>Smarter journeys,<br>designed for you.</h1>
+      <p>Interactive destination discovery, live budget calculation, and custom itineraries for your next escape.</p>
+      <div class="hero-buttons">
+        <a href="#explore" class="btn btn-primary">Start Exploring</a>
+        <a href="#planner" class="btn btn-secondary">Calculate Budget</a>
+      </div>
+    </div>
   </header>
 
-  <main class="hero">
-    <h1>Explore the World</h1>
-    <p>Find your next adventure with our curated travel guide.</p>
-    <button id="explore-btn">Get Destination Idea</button>
-    <p id="suggestion"></p>
-  </main>
+  <!-- Destination Discovery Section -->
+  <section class="section" id="explore">
+    <div class="section-header">
+      <h2>Curated Destinations</h2>
+      <div class="filter-group">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="Asia">Asia</button>
+        <button class="filter-btn" data-filter="Europe">Europe</button>
+        <button class="filter-btn" data-filter="Africa">Africa</button>
+      </div>
+    </div>
 
+    <div class="grid" id="destinations-grid">
+      <!-- Injected via JavaScript -->
+    </div>
+  </section>
+
+  <!-- Live Budget Calculator -->
+  <section class="section planner-section" id="planner">
+    <div class="planner-box">
+      <h2>Trip Cost Estimator</h2>
+      <p>Adjust the sliders to estimate real-time travel and living expenses.</p>
+
+      <div class="planner-grid">
+        <div class="control-group">
+          <label for="days-slider">Days of Stay: <strong id="days-val">7</strong></label>
+          <input type="range" id="days-slider" min="1" max="30" value="7" />
+        </div>
+
+        <div class="control-group">
+          <label for="travelers-slider">Travelers: <strong id="travelers-val">2</strong></label>
+          <input type="range" id="travelers-slider" min="1" max="8" value="2" />
+        </div>
+
+        <div class="control-group">
+          <label for="tier-select">Style of Travel</label>
+          <select id="tier-select">
+            <option value="50">Backpacker / Budget (~$50/day)</option>
+            <option value="150" selected>Standard Comfort (~$150/day)</option>
+            <option value="350">Luxury Experience (~$350/day)</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="estimate-display">
+        <span>Estimated Total Budget</span>
+        <h3 id="total-cost">$2,100</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Packing Checklist -->
+  <section class="section" id="checklist">
+    <div class="section-header">
+      <h2>Essential Packing Checklist</h2>
+      <p>Items persist locally even if you refresh your browser window.</p>
+    </div>
+
+    <div class="checklist-container">
+      <form id="item-form">
+        <input type="text" id="item-input" placeholder="Add custom item (e.g., Passport, Camera)..." required />
+        <button type="submit" class="btn btn-primary">Add</button>
+      </form>
+      <ul id="items-list" class="checklist">
+        <!-- Injected via JavaScript -->
+      </ul>
+    </div>
+  </section>
+
+  <!-- Footer -->
   <footer>
-    <p>©️ 2026 Wanderlust. Built for DevSoc Competition.</p>
+    <p>©️ 2026 TerraNova. Built for DevSoc Competition.</p>
   </footer>
 
   <script src="script.js"></script>
