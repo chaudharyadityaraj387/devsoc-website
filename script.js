@@ -1,18 +1,60 @@
-// Data Models
+// Data Models with Video Previews and Cost in INR
 const destinations = [
-  { id: 1, name: 'Kyoto, Japan', region: 'Asia', desc: 'Serene bamboo forests, ancient shrines, and rich culinary heritage.' },
-  { id: 2, name: 'Reykjavik, Iceland', region: 'Europe', desc: 'Geothermal hot springs, glaciers, and stunning displays of aurora borealis.' },
-  { id: 3, name: 'Cape Town, South Africa', region: 'Africa', desc: 'Towering ocean cliffs, Table Mountain vistas, and coastal wildlife.' },
-  { id: 4, name: 'Chiang Mai, Thailand', region: 'Asia', desc: 'Misty mountain sanctuaries, lantern celebrations, and street food markets.' },
-  { id: 5, name: 'Swiss Alps, Switzerland', region: 'Europe', desc: 'Charming alpine chalets, world-class slopes, and glacial railways.' },
-  { id: 6, name: 'Serengeti, Tanzania', region: 'Africa', desc: 'Classic safari plains, extraordinary biodiversity, and vast sunrises.' }
+  {
+    id: 1,
+    name: 'Ladakh, India',
+    category: 'India',
+    desc: 'Breathtaking mountain passes, crystal-clear high altitude lakes, and Buddhist monasteries.',
+    estCost: '₹35,000 / week',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-curvy-road-on-a-rocky-mountain-range-41544-large.mp4'
+  },
+  {
+    id: 2,
+    name: 'Goa Beaches, India',
+    category: 'India',
+    desc: 'Golden sands, vibrant flea markets, coastal cuisine, and scenic beach sunsets.',
+    estCost: '₹22,000 / week',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-with-waves-42544-large.mp4'
+  },
+  {
+    id: 3,
+    name: 'Kerala Backwaters, India',
+    category: 'India',
+    desc: 'Peaceful houseboat cruises through palm-fringed canals, spice plantations, and lagoons.',
+    estCost: '₹28,000 / week',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-sun-setting-over-a-calm-river-surrounded-by-trees-43673-large.mp4'
+  },
+  {
+    id: 4,
+    name: 'Kyoto, Japan',
+    category: 'International',
+    desc: 'Historic pagodas, tranquil bamboo groves, traditional tea houses, and shrines.',
+    estCost: '₹1,20,000 / week',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-woman-walking-through-a-japanese-garden-with-parasol-40333-large.mp4'
+  },
+  {
+    id: 5,
+    name: 'Swiss Alps, Switzerland',
+    category: 'International',
+    desc: 'Snow-capped peaks, scenic glacial trains, pristine lakes, and alpine chalets.',
+    estCost: '₹1,80,000 / week',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-snowy-mountain-range-41549-large.mp4'
+  },
+  {
+    id: 6,
+    name: 'Bali, Indonesia',
+    category: 'International',
+    desc: 'Lush terraced rice paddies, cliffside temples, surfing beaches, and volcanic hills.',
+    estCost: '₹75,000 / week',
+    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-waves-coming-to-the-beach-5016-large.mp4'
+  }
 ];
 
 let savedDestinations = new Set();
-let checklist = JSON.parse(localStorage.getItem('tn_items')) || [
-  { text: 'Valid Passport / ID', done: true },
-  { text: 'Universal Power Adapter', done: false },
-  { text: 'Travel Insurance Documents', done: false }
+let checklist = JSON.parse(localStorage.getItem('tn_items_inr')) || [
+  { text: 'Aadhaar Card / Passport', done: true },
+  { text: 'Power Bank & Charger', done: false },
+  { text: 'UPI / Travel Cards Activated', done: false }
 ];
 
 // Elements
@@ -20,34 +62,40 @@ const grid = document.getElementById('destinations-grid');
 const filterBtns = document.querySelectorAll('.filter-btn');
 const savedBadge = document.getElementById('saved-count');
 
-// Render Destinations
+// Render Destinations with Video Previews
 function renderCards(filter = 'all') {
   grid.innerHTML = '';
   const filtered = filter === 'all' 
     ? destinations 
-    : destinations.filter(d => d.region === filter);
+    : destinations.filter(d => d.category === filter);
 
   filtered.forEach(item => {
     const isSaved = savedDestinations.has(item.id);
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-      <div>
-        <span class="card-region">${item.region}</span>
-        <h3>${item.name}</h3>
-        <p>${item.desc}</p>
+      <div class="card-video-box">
+        <video src="${item.videoUrl}" autoplay loop muted playsinline></video>
       </div>
-      <div class="card-footer">
-        <button class="bookmark-btn ${isSaved ? 'saved' : ''}" onclick="toggleSave(${item.id})">
-          ${isSaved ? '★ Bookmarked' : '☆ Save'}
-        </button>
+      <div class="card-body">
+        <div>
+          <span class="card-region">${item.category}</span>
+          <h3>${item.name}</h3>
+          <p>${item.desc}</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-cost">${item.estCost}</span>
+          <button class="bookmark-btn ${isSaved ? 'saved' : ''}" onclick="toggleSave(${item.id})">
+            ${isSaved ? '★ Bookmarked' : '☆ Save'}
+          </button>
+        </div>
       </div>
     `;
     grid.appendChild(card);
   });
 }
 
-// Bookmark Feature
+// Bookmark Functionality
 window.toggleSave = function(id) {
   if (savedDestinations.has(id)) {
     savedDestinations.delete(id);
@@ -59,7 +107,7 @@ window.toggleSave = function(id) {
   renderCards(activeFilter);
 };
 
-// Filter Controls
+// Filter Buttons
 filterBtns.forEach(btn => {
   btn.addEventListener('click', () => {
     filterBtns.forEach(b => b.classList.remove('active'));
@@ -68,7 +116,7 @@ filterBtns.forEach(btn => {
   });
 });
 
-// Real-Time Budget Estimator
+// Real-Time Budget Estimator (INR formatted)
 const daysSlider = document.getElementById('days-slider');
 const travelersSlider = document.getElementById('travelers-slider');
 const tierSelect = document.getElementById('tier-select');
@@ -85,7 +133,8 @@ function updateBudget() {
   travelersVal.innerText = people;
 
   const total = days * people * costPerDay;
-  totalCost.innerText = `$${total.toLocaleString()}`;
+  // Format to Indian numbering system (e.g. ₹84,000)
+  totalCost.innerText = `₹${total.toLocaleString('en-IN')}`;
 }
 
 [daysSlider, travelersSlider, tierSelect].forEach(input => {
@@ -110,7 +159,7 @@ function renderChecklist() {
     `;
     itemsList.appendChild(li);
   });
-  localStorage.setItem('tn_items', JSON.stringify(checklist));
+  localStorage.setItem('tn_items_inr', JSON.stringify(checklist));
 }
 
 itemForm.addEventListener('submit', (e) => {

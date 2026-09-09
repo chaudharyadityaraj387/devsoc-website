@@ -16,7 +16,7 @@
     <div class="logo">Terra<span>Nova</span></div>
     <div class="nav-links">
       <a href="#explore">Explore</a>
-      <a href="#planner">Budget Planner</a>
+      <a href="#planner">Cost Estimator</a>
       <a href="#checklist">Packing List</a>
     </div>
     <div class="nav-actions">
@@ -29,10 +29,10 @@
     <div class="hero-content">
       <div class="tag">AI-Inspired Discovery</div>
       <h1>Smarter journeys,<br>designed for you.</h1>
-      <p>Interactive destination discovery, live budget calculation, and custom itineraries for your next escape.</p>
+      <p>Interactive destination discovery, live INR budget calculation, and curated travel video previews.</p>
       <div class="hero-buttons">
         <a href="#explore" class="btn btn-primary">Start Exploring</a>
-        <a href="#planner" class="btn btn-secondary">Calculate Budget</a>
+        <a href="#planner" class="btn btn-secondary">Calculate in ₹</a>
       </div>
     </div>
   </header>
@@ -43,9 +43,8 @@
       <h2>Curated Destinations</h2>
       <div class="filter-group">
         <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="Asia">Asia</button>
-        <button class="filter-btn" data-filter="Europe">Europe</button>
-        <button class="filter-btn" data-filter="Africa">Africa</button>
+        <button class="filter-btn" data-filter="India">India</button>
+        <button class="filter-btn" data-filter="International">International</button>
       </div>
     </div>
 
@@ -54,11 +53,11 @@
     </div>
   </section>
 
-  <!-- Live Budget Calculator -->
+  <!-- Live Budget Calculator (INR) -->
   <section class="section planner-section" id="planner">
     <div class="planner-box">
-      <h2>Trip Cost Estimator</h2>
-      <p>Adjust the sliders to estimate real-time travel and living expenses.</p>
+      <h2>Trip Cost Estimator (₹ INR)</h2>
+      <p>Adjust the sliders to estimate real-time travel and living expenses in Rupees.</p>
 
       <div class="planner-grid">
         <div class="control-group">
@@ -74,16 +73,16 @@
         <div class="control-group">
           <label for="tier-select">Style of Travel</label>
           <select id="tier-select">
-            <option value="50">Backpacker / Budget (~$50/day)</option>
-            <option value="150" selected>Standard Comfort (~$150/day)</option>
-            <option value="350">Luxury Experience (~$350/day)</option>
+            <option value="2500">Backpacker / Budget (~₹2,500/day)</option>
+            <option value="6000" selected>Standard Comfort (~₹6,000/day)</option>
+            <option value="15000">Luxury Experience (~₹15,000/day)</option>
           </select>
         </div>
       </div>
 
       <div class="estimate-display">
         <span>Estimated Total Budget</span>
-        <h3 id="total-cost">$2,100</h3>
+        <h3 id="total-cost">₹84,000</h3>
       </div>
     </div>
   </section>
@@ -97,7 +96,7 @@
 
     <div class="checklist-container">
       <form id="item-form">
-        <input type="text" id="item-input" placeholder="Add custom item (e.g., Passport, Camera)..." required />
+        <input type="text" id="item-input" placeholder="Add custom item (e.g., Aadhaar/Passport, Power Bank)..." required />
         <button type="submit" class="btn btn-primary">Add</button>
       </form>
       <ul id="items-list" class="checklist">
