@@ -1,4 +1,4 @@
-// Data Models with Video Previews and Cost in INR
+// Data Models with High-Quality Image URLs and INR Pricing
 const destinations = [
   {
     id: 1,
@@ -6,7 +6,7 @@ const destinations = [
     category: 'India',
     desc: 'Breathtaking mountain passes, crystal-clear high altitude lakes, and Buddhist monasteries.',
     estCost: '₹35,000 / week',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-curvy-road-on-a-rocky-mountain-range-41544-large.mp4'
+    imageUrl: 'https://images.unsplash.com/photo-1581793745862-99fde7fa73d2?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 2,
@@ -14,7 +14,7 @@ const destinations = [
     category: 'India',
     desc: 'Golden sands, vibrant flea markets, coastal cuisine, and scenic beach sunsets.',
     estCost: '₹22,000 / week',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-beach-with-waves-42544-large.mp4'
+    imageUrl: 'https://images.unsplash.com/photo-1512343879784-a960bf40e7f2?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 3,
@@ -22,7 +22,7 @@ const destinations = [
     category: 'India',
     desc: 'Peaceful houseboat cruises through palm-fringed canals, spice plantations, and lagoons.',
     estCost: '₹28,000 / week',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-sun-setting-over-a-calm-river-surrounded-by-trees-43673-large.mp4'
+    imageUrl: 'https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 4,
@@ -30,7 +30,7 @@ const destinations = [
     category: 'International',
     desc: 'Historic pagodas, tranquil bamboo groves, traditional tea houses, and shrines.',
     estCost: '₹1,20,000 / week',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-woman-walking-through-a-japanese-garden-with-parasol-40333-large.mp4'
+    imageUrl: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 5,
@@ -38,7 +38,7 @@ const destinations = [
     category: 'International',
     desc: 'Snow-capped peaks, scenic glacial trains, pristine lakes, and alpine chalets.',
     estCost: '₹1,80,000 / week',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-aerial-view-of-a-snowy-mountain-range-41549-large.mp4'
+    imageUrl: 'https://images.unsplash.com/photo-1530122037265-a5f1f91d3b99?auto=format&fit=crop&w=800&q=80'
   },
   {
     id: 6,
@@ -46,7 +46,7 @@ const destinations = [
     category: 'International',
     desc: 'Lush terraced rice paddies, cliffside temples, surfing beaches, and volcanic hills.',
     estCost: '₹75,000 / week',
-    videoUrl: 'https://assets.mixkit.co/videos/preview/mixkit-waves-coming-to-the-beach-5016-large.mp4'
+    imageUrl: 'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=800&q=80'
   }
 ];
 
@@ -62,7 +62,7 @@ const grid = document.getElementById('destinations-grid');
 const filterBtns = document.querySelectorAll('.filter-btn');
 const savedBadge = document.getElementById('saved-count');
 
-// Render Destinations with Video Previews
+// Render Destinations
 function renderCards(filter = 'all') {
   grid.innerHTML = '';
   const filtered = filter === 'all' 
@@ -74,8 +74,8 @@ function renderCards(filter = 'all') {
     const card = document.createElement('div');
     card.className = 'card';
     card.innerHTML = `
-      <div class="card-video-box">
-        <video src="${item.videoUrl}" autoplay loop muted playsinline></video>
+      <div class="card-image-box">
+        <img src="${item.imageUrl}" alt="${item.name}" loading="lazy" />
       </div>
       <div class="card-body">
         <div>
@@ -133,7 +133,6 @@ function updateBudget() {
   travelersVal.innerText = people;
 
   const total = days * people * costPerDay;
-  // Format to Indian numbering system (e.g. ₹84,000)
   totalCost.innerText = `₹${total.toLocaleString('en-IN')}`;
 }
 
